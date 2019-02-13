@@ -26,7 +26,8 @@ public class HighlyDivisibleNumber {
 
     public static void main(String[] args){
 
-       System.out.println(getHiglyDivisibleTriangleNUmber(500));
+       System.out.println(getHiglyDivisibleTriangleNUmber(6));
+
     }
 
     /**
@@ -38,7 +39,7 @@ public class HighlyDivisibleNumber {
     public static int getHiglyDivisibleTriangleNUmber(int n){
         int triangle_number = 0;
         int i = 0;
-        while (getNumberOfDivisors(triangle_number) < n){
+        while (getNoOfDivisors(triangle_number) < n){
             triangle_number += i;
             i++;
 
@@ -46,39 +47,26 @@ public class HighlyDivisibleNumber {
         return triangle_number;
     }
 
+
     /**
      *
-     * @param dividend - number which we are getting number of divisors
-     * @return divisors_count
+     * @param n
+     * @return
      */
+    public static int getNoOfDivisors(int n) {
+        int noOfDivisors = 0;
+        int sqrt = (int) Math.floor(Math.sqrt(n));
 
-    public static int getNumberOfDivisors(int dividend){
-
-        int divisors_count = 0;
-
-
-        /**---------------------------------------------------------------------------
-         * Earlier I had done this
-         *
-         *  for ( int i = 1; i <= dividend; i++){
-         *      if ((dividend%i) == 0){
-         *                 divisors_count ++;
-         *             }
-         *  }
-         *  return divisors_count;
-         *
-         *  However I noticed it is taking very long, upto more than 4mins.
-         *  Then I changed to the code below. It performance seems to have improved though not the best.
-         *  Kindly advice on this.
-         ------------------------------------------------------------------------------*/
-        for (int i = 1; i*i <= dividend; i++){
-            //
-            if ((dividend % i) == 0){
-                divisors_count ++;
+        for (int a=1; a<=sqrt; a++) {
+            if (n % a == 0) {
+                if (n / a == a) {
+                    noOfDivisors++;
+                } else {
+                    noOfDivisors += 2;
+                }
             }
         }
-//
-//
-        return divisors_count*2;
+
+        return noOfDivisors;
     }
 }
